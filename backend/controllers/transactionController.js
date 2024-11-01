@@ -46,6 +46,7 @@ exports.sendUSDC = async (req, res) => {
 
     // Convert amount to correct units
     const amountToSend = ethers.parseUnits(amount.toString(), decimals);
+    // const amountToSend = ethers.utils.parseUnits(amount, decimals); // BigInt Format
     console.log('amountToSend:', amountToSend);
 
     // Send USDC
@@ -55,7 +56,26 @@ exports.sendUSDC = async (req, res) => {
     // Wait for the transaction to be mined (optional)
     await tx.wait();
 
-    res.json({ message: 'Transaction successful', txHash: tx.hash, transactionAmount: amountToSend});
+    // Prepare a safe response by converting BigInt values to strings
+    const safeTransaction = {
+      hash: tx.hash,
+      to: tx.to,
+      from: tx.from,
+      nonce: tx.nonce.toString(), // Convert BigInt to string
+      gasLimit: tx.gasLimit.toString(), // Convert BigInt to string
+      maxPriorityFeePerGas: tx.maxPriorityFeePerGas.toString(), // Convert BigInt to string
+      maxFeePerGas: tx.maxFeePerGas.toString(), // Convert BigInt to string
+      type: tx.type,
+      chainId: tx.chainId.toString(), // Convert BigInt to string
+      data: tx.data,
+      value: tx.value.toString(), // Convert BigInt to string
+      // Include other necessary fields as strings
+    };
+
+    res.status(200).json({
+      message: 'Transaction successful!',
+      transaction: safeTransaction,
+    });
 
   } catch (error) {
     console.error(error);

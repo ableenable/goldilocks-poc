@@ -91,3 +91,23 @@ exports.loginUser = async (req, res) => {
     res.status(500).send('Server error');
   }
 };
+
+// Get User Data
+// @desc    Get authenticated user's data
+// @route   GET /api/auth/user
+// @access  Private
+exports.getUserData = async (req, res) => {
+  try {
+    const userId = req.user;
+
+    const user = await User.findById(userId).select('-password -privateKey');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({ user });
+  } catch (error) {
+    console.error('Error in getUserData:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
