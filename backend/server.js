@@ -22,11 +22,13 @@ mongoose
 const authRoutes = require('./routes/authRoutes');
 const transactionRoutes = require('./routes/transactions');
 const accountRoutes = require('./routes/accountRoutes');
+const agentRoutes = require('./routes/agentRoutes');
 
 // Use Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/account', accountRoutes);
+app.use('/api/agent', agentRoutes);
 
 
 // Start server

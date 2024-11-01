@@ -51,13 +51,18 @@ function Sidebar() {
       <Logo>Goldilocks</Logo>
       <Menu>
         <MenuItem>
-          <StyledNavLink to="/">
+          <StyledNavLink exact to="/">
             Dashboard
           </StyledNavLink>
         </MenuItem>
         <MenuItem>
           <StyledNavLink to="/transfer">
             Transfer
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/agent">
+            Agent Assistant
           </StyledNavLink>
         </MenuItem>
         <MenuItem>

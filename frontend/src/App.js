@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Account from './pages/Account';
+import Agent from './pages/Agent';
 import Transfer from './pages/Transfer';
 import { AuthContext } from './context/AuthContext';
 
@@ -21,6 +22,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/transfer" element={<Transfer />} />
             <Route path="/account" element={<Account />} />
+            <Route path="/agent" element={<Agent />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Layout>
