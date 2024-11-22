@@ -14,6 +14,17 @@ const ContentWrapper = styled.div`
   padding: 40px;
   background-color: #f9f9f9;
   min-height: 100vh;
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    margin-left: 200px;
+    padding: 20px;
+  }
+
+  @media (max-width: 480px) {
+    margin-left: 0;
+    padding: 10px;
+  }
 `;
 
 function Layout({ children }) {

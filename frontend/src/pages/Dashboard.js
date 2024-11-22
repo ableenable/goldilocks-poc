@@ -10,30 +10,30 @@ const DashboardWrapper = styled.div`
   font-family: 'Roboto', sans-serif;
 `;
 
-const SectionsRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+const Title = styled.h2`
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 30px;
+  color: #bf9000;
 `;
 
-const Section = styled.div`
+const InfoSection = styled.div`
   background-color: #ffffff;
   padding: 30px;
-  flex: 1;
-  margin: 10px;
-  min-width: 300px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  border-radius: 8px;
-`;
-
-const Label = styled.h3`
-  font-family: 'Playfair Display', serif;
   margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  border-radius: 12px;
 `;
 
-const Value = styled.p`
-  font-size: 18px;
+const InfoTitle = styled.h3`
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 15px;
+  color: #bf9000;
+`;
+
+const InfoValue = styled.p`
+  font-size: 16px;
   word-break: break-all;
+  margin: 0 0 10px 0;
 `;
 
 const CopyButton = styled.button`
@@ -44,12 +44,29 @@ const CopyButton = styled.button`
   font-family: 'Playfair Display', serif;
   font-size: 14px;
   cursor: pointer;
-  border-radius: 4px;
-  margin-top: 10px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
 
   &:hover {
     background-color: #a67c00;
   }
+
+  &:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+  }
+`;
+
+const Balance = styled.p`
+  font-size: 18px;
+  color: #303030;
+  margin: 0;
+`;
+
+const CopySuccess = styled.span`
+  color: green;
+  font-size: 14px;
+  margin-left: 10px;
 `;
 
 function Dashboard() {
@@ -73,25 +90,28 @@ function Dashboard() {
     fetchBalance();
   }, []);
 
+  const handleCopy = () => {
+    setCopySuccess('Copied!');
+    setTimeout(() => setCopySuccess(''), 2000);
+  };
+
   return (
     <DashboardWrapper>
-      <h2 style={{ fontFamily: 'Playfair Display, serif' }}>Dashboard</h2>
-      <SectionsRow>
-        <Section>
-          <Label>Wallet Address</Label>
-          <Value>{user.walletAddress}</Value>
-          <CopyToClipboard text={user.walletAddress} onCopy={() => setCopySuccess('Copied!')}>
-            <CopyButton>Copy Address</CopyButton>
-          </CopyToClipboard>
-          {copySuccess && <p style={{ color: 'green' }}>{copySuccess}</p>}
-        </Section>
-        <Section>
-          <Label>Wallet Balance</Label>
-          <Value>{loading ? 'Loading...' : `${balance} USDC`}</Value>
-        </Section>
-      </SectionsRow>
+      <Title>Dashboard</Title>
+      <InfoSection>
+        <InfoTitle>Wallet Address</InfoTitle>
+        <InfoValue>{user.walletAddress}</InfoValue>
+        <CopyToClipboard text={user.walletAddress} onCopy={handleCopy}>
+          <CopyButton>Copy Address</CopyButton>
+        </CopyToClipboard>
+        {copySuccess && <CopySuccess>{copySuccess}</CopySuccess>}
+      </InfoSection>
+      <InfoSection>
+        <InfoTitle>Wallet Balance</InfoTitle>
+        <Balance>{loading ? 'Loading...' : `${balance} USDC`}</Balance>
+      </InfoSection>
     </DashboardWrapper>
   );
 }
 
-export default Dashboard;
+export default Dashboard; 

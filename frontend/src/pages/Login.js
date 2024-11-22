@@ -11,21 +11,27 @@ const Container = styled.div`
   height: 100vh;
   align-items: center;
   justify-content: center;
+  background-color: #f9f9f9;
 `;
 
 const LoginBox = styled.div`
   background-color: #ffffff;
-  padding: 40px;
+  padding: 40px 60px;
   width: 400px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border-radius: 12px;
   text-align: center;
+
+  @media (max-width: 480px) {
+    padding: 20px 30px;
+    width: 90%;
+  }
 `;
 
 const Logo = styled.h1`
   font-family: 'Playfair Display', serif;
   color: #bf9000;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 `;
 
 const Form = styled.form`
@@ -34,17 +40,25 @@ const Form = styled.form`
 
 const Label = styled.label`
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   font-family: 'Playfair Display', serif;
+  font-size: 16px;
 `;
 
 const Input = styled.input`
   width: 100%;
-  padding: 12px;
+  padding: 12px 15px;
   margin-bottom: 20px;
   border: 1px solid #cccccc;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 16px;
+  box-sizing: border-box;
+
+  &:focus {
+    border-color: #bf9000;
+    outline: none;
+    box-shadow: 0 0 5px rgba(191, 144, 0, 0.5);
+  }
 `;
 
 const Button = styled.button`
@@ -56,22 +70,29 @@ const Button = styled.button`
   font-family: 'Playfair Display', serif;
   font-size: 18px;
   cursor: pointer;
-  border-radius: 4px;
-  margin-top: 10px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
 
   &:hover {
     background-color: #a67c00;
+  }
+
+  &:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
   }
 `;
 
 const ErrorMessage = styled.p`
   color: red;
   text-align: center;
+  margin-bottom: 20px;
 `;
 
 const RegisterLink = styled.p`
   margin-top: 20px;
   font-size: 16px;
+  text-align: center;
 
   a {
     color: #bf9000;
@@ -108,19 +129,23 @@ function Login() {
       <LoginBox>
         <Logo>Goldilocks</Logo>
         <Form onSubmit={handleSubmit}>
-          <Label>Email:</Label>
+          <Label htmlFor="email">Email:</Label>
           <Input
+            id="email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            placeholder="Enter your email"
           />
-          <Label>Password:</Label>
+          <Label htmlFor="password">Password:</Label>
           <Input
+            id="password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            placeholder="Enter your password"
           />
           {error && <ErrorMessage>{error}</ErrorMessage>}
           <Button type="submit">Login</Button>

@@ -20,6 +20,7 @@ const Logo = styled.h1`
   font-family: 'Playfair Display', serif;
   color: #bf9000;
   margin-bottom: 40px;
+  text-align: center;
 `;
 
 const Menu = styled.ul`
@@ -33,14 +34,21 @@ const MenuItem = styled.li`
 
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
-  color: #000000;
+  color: #303030;
   font-size: 18px;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 8px;
 
   &.active {
+    background-color: #bf9000;
+    color: #ffffff;
     font-weight: bold;
   }
 
   &:hover {
+    background-color: #f2f2f2;
     color: #bf9000;
   }
 `;
@@ -62,7 +70,7 @@ function Sidebar() {
         </MenuItem>
         <MenuItem>
           <StyledNavLink to="/agent">
-            Agent Assistant
+            AI Assistant
           </StyledNavLink>
         </MenuItem>
         <MenuItem>

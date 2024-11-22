@@ -20,7 +20,7 @@ mongoose
 
 // Import Routes
 const authRoutes = require('./routes/authRoutes');
-const transactionRoutes = require('./routes/transactions');
+const transactionRoutes = require('./routes/transactionsRoutes');
 const accountRoutes = require('./routes/accountRoutes');
 const agentRoutes = require('./routes/agentRoutes');
 
