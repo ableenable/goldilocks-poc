@@ -48,7 +48,11 @@ exports.handleAgent = async (req, res) => {
     // Attempt to parse JSON from the reply
     let action = null;
     try {
-      const parsedReply = JSON.parse(reply);
+      const replyString = String(reply);
+      const match = replyString.match(/\{[\s\S]*\}/);
+      if (!match) throw new Error('No JSON found');
+      extractedJsonString = match[0];
+      const parsedReply = JSON.parse(extractedJsonString);
       console.log('Parsed reply action:', parsedReply.action);
       if (parsedReply.action === 'transfer') {
         action = parsedReply;
